@@ -2,7 +2,7 @@ from typing import List
 from fastapi import FastAPI
 from langserve import add_routes
 
-from irt_app import chain_with_message_history
+from  irt_app import full_chain
 
 # App definition
 app = FastAPI(
@@ -15,7 +15,7 @@ app = FastAPI(
 
 add_routes(
     app,
-    chain_with_message_history,
+    full_chain,
     path="/chain",
 )
 
