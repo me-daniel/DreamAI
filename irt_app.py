@@ -1,6 +1,5 @@
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
-from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
 
 from langchain_community.chat_message_histories import ChatMessageHistory
