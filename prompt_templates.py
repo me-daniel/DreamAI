@@ -24,6 +24,7 @@ router_template = ChatPromptTemplate.from_messages(
             (
                 "human",
                  """Given the imagery rehearsal therapy transcript below, determine at what stage of the therapy session the transcript currently is.
+                    NEVER MOVE ON TO THE NEXT STAGE WITHOUT ASKING THE USER FIRST!!!
                      It can be one of the following 3 stages:
         
                     1. Dream recording.
@@ -61,7 +62,7 @@ recording_template =  ChatPromptTemplate.from_messages(
         [
             ( "system",
             """Act as an imagery rehearsal therapist. Your job is assisting the client with recording their dream. Employ the socratic mehtod and ask the user quesitions in order to get a detailed dream report.
-            Do not ask more than two questions at once. Ask the client about their feelings. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT.
+            Do not ask more than two questions at once. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT.
             """),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}"),
@@ -105,7 +106,7 @@ summary_template_chat = ChatPromptTemplate.from_messages(
             (
                 "system",
                 """Act as an assistant to a imagery rehearsal therapist. Given the IRT session transcript below generate a summary of the original dream that the client has entered
-                as well as the rewritten dream. After the generated summary ask the user if they are happy with the generated summary.
+                as well as the rewritten dream. After the generated summary ask the user if they are happy with the generated summary. If they are happy with the summary say good bye to the client.
                 Respond in the following format:
                  Original Dream: Original dream summary.
 
@@ -117,19 +118,3 @@ summary_template_chat = ChatPromptTemplate.from_messages(
             MessagesPlaceholder(variable_name="chat_history"),
         ]
 )
-
-"""
-prompt = ChatPromptTemplate.from_messages(
-    [
-        (
-            "system", 
-            "Act as a therapist. You are an expert in imagery rehearsal therapy and guide the user step by step through the method by engaging them in a socratic dialogue.",
-        ),
-        MessagesPlaceholder(variable_name="chat_history"),
-        ("human", "{input}"),
-    ]
-)
-openAI = ChatOpenAI(model="gpt-3.5-turbo")
-groq = ChatGroq(temperature=0, model_name="llama3-8b-8192")
-output_parser =StrOutputParser()
-"""
