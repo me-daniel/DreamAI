@@ -6,7 +6,7 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_core.runnables import RunnableLambda, Runnable
 
-from prompt_templates import router_template, recording_template, rewriting_template, summary_template, summary_template_chat
+from prompt_templates import router_template, recording_template, rewriting_template, summary_template
 
 import os
 
@@ -32,8 +32,6 @@ rewriting_chain =  rewriting_template | openAI | StrOutputParser()
 
 summary_chain = summary_template | openAI | StrOutputParser()
 
-summary_chain_chat = summary_template_chat | openAI | StrOutputParser()
-
 
 # Routing function 
 def route(info):
@@ -42,7 +40,7 @@ def route(info):
     elif "rewriting" in info["stage"].lower():
         return rewriting_chain
     else:
-        return summary_chain_chat
+        return summary_chain
     
 def clean_history(chat_history):
     if len(chat_history.messages) > 1:

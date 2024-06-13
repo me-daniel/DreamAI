@@ -1,24 +1,5 @@
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
-
-router_template_old = PromptTemplate.from_template(
-        """Given the imagery rehearsal therapy transcript below, determine at what stage of the therapy session the transcript currently is.
-        It can be one of the following 3 stages:
-        
-        1. Dream recording.
-            We are at the beginning of the session or the user is still in the process of describing their dream.
-        2. Dream rewriting.
-            The user is done entering their dream and either has already moved on to rewriting the dream or should move on to rewriting now.
-        3. Dream summary.
-            The user has finished describing their dream and also rewriting it. Now it is time to summarize the original and rewritten dream.
-        Do not respond with more than one word. Only respon with either: recording, rewriting or summary.
-
-        <transcript>
-        {transcript}
-        </transcript>
-
-        Classification:"""
-        )
-    
+   
 router_template = ChatPromptTemplate.from_messages(
         [
             (
@@ -61,8 +42,9 @@ router_template = ChatPromptTemplate.from_messages(
 recording_template =  ChatPromptTemplate.from_messages(
         [
             ( "system",
-            """Act as an imagery rehearsal therapist. Your job is assisting the client with recording their dream. Employ the socratic mehtod and ask the user quesitions in order to get a detailed dream report.
-            Do not ask more than two questions at once. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT.
+            """Act as an imagery rehearsal therapist. Your job is assisting the client with recording their dream. Employ the socratic mehtod. If you think it is necessary ask the user quesitions in order to get a detailed dream report. 
+            Do not ask unnecessary questions.
+            Do not ask more than one question at once. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT.
             """),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}"),
@@ -74,7 +56,7 @@ rewriting_template = ChatPromptTemplate.from_messages(
             (
             "system",
             """Act as an imagery rehearsal therapist. Your job is assisting the client with rewriting of their dream according to the IRT method. You take a session transcript and guide the user step by step
-            thourgh the rewriting process by asking them questions. Do not just suggest chagnes, they are supposed to come from the client themself. Once you think the rewriting process is completed,
+            thourgh the rewriting process by asking them questions. Ask the user at which point they want to start changing the dream. Do not just suggest chagnes, they are supposed to come from the client themself. Once you think the rewriting process is completed,
             ask the user if they are happy with their rewritten dream and ask them if you should generate a summary. Very important  ASK THE USER WETHER THEY FEEL THEY ARE DONE WITH REWRITING AND WANT TO MOVE ON
             TO THE SUMMARY STEP!
             """
@@ -85,36 +67,28 @@ rewriting_template = ChatPromptTemplate.from_messages(
         ] 
     ) 
 
-summary_template = PromptTemplate.from_template(
-        """Act as an assistant to a imagery rehearsal therapist. Given the IRT session transcript below generate a summary of the original dream that the client has entered
-        as well as the rewritten dream.
-        Respond in the following format:
-        Original Dream: Original dream summary.
 
-        Rewritten Dream: Rewritten dream summary.
-    
-
-        <transcript>
-        {transcript}
-        {input}
-        </transcript>
-        """
-    ) 
-
-summary_template_chat = ChatPromptTemplate.from_messages(
+summary_template = ChatPromptTemplate.from_messages(
     [
             (
                 "system",
                 """Act as an assistant to a imagery rehearsal therapist. Given the IRT session transcript below generate a summary of the original dream that the client has entered
                 as well as the rewritten dream. After the generated summary ask the user if they are happy with the generated summary. If they are happy with the summary say good bye to the client.
-                Respond in the following format:
-                 Original Dream: Original dream summary.
+                If they are unhappy with the summary ask them what should be changed.
 
-                Rewritten Dream: Rewritten dream summary.
+                Respond in the following format if there was no previous summary generated or the user was unhappy with the summary:
+                
+                    Original Dream: Original dream summary.
 
-                Are you happy with the generated summary?
+                    Rewritten Dream: Rewritten dream summary.
+
+                    Are you happy with the generated summary?
+
+                If the user is happy with the previously generated summary say goodby to them.
+
                 """
             ),
             MessagesPlaceholder(variable_name="chat_history"),
+            ("human", "{input}"),
         ]
 )

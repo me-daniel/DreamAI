@@ -5,6 +5,4 @@
 .env
 vnv
 
-## pychace ## 
-**/__pycache__/
 # End of https://www.toptal.com/developers/gitignore/api/dotenv
