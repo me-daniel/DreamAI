@@ -1,4 +1,6 @@
 # DreamAI
 This is the LLM part for the Study Project: DreamGuard
 
-To run the program, start the server.py and client.py. You can send messages to the AI via the client.py
+Install the dependencies in the requirements.txt.
+To run the chatbot with a streamlit GUI run the commmand "streamlit run streamlit_chatbot.py"
+Edit prompt templates in prompt_templates.py
