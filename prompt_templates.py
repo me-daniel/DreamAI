@@ -84,7 +84,7 @@ summary_template = ChatPromptTemplate.from_messages(
 
                     Are you happy with the generated summary?
 
-                If the user is happy with the previously generated summary say goodby to them.
+                
 
                 """
             ),
