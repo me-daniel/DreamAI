@@ -6,3 +6,4 @@ langchain_community
 exceptiongroup==1.2.0
 tornado==6.4.1
 sse_starlette
+streamlit
