@@ -8,12 +8,16 @@ from langchain_core.runnables import RunnableLambda, Runnable
 
 from prompt_templates import router_template, recording_template, rewriting_template, summary_template
 
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
+os.environ["LANGCHAIN_TRACING_V2"] = "false" #set to true to trace the conversation on langchain
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")
 
 ephemeral_chat_history_for_chain = ChatMessageHistory()
 ephemeral_chat_history_2 = ChatMessageHistory()
@@ -81,8 +85,8 @@ post_processing_runnable = PostProcessingRunnable(router_chain_chat_history, cle
 # Create the full chain configuration
 full_chain = {"stage": post_processing_runnable, "input": lambda x: x["input"]} | router_with_history
 
-# Chatbot loop
-while True:
+# Chatbot loop - while True for using irt_app.py instead of server
+while False:
     user_in = input("User: ")
     response = full_chain.invoke({"input": user_in},
                                  {"configurable": {"session_id": 'unused'}})
