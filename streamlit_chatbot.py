@@ -9,6 +9,9 @@ from langchain_core.runnables import RunnableLambda, Runnable
 
 from prompt_templates import router_template, recording_template, rewriting_template, summary_template
 
+from dotenv import load_dotenv
+load_dotenv()
+
 import os
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
