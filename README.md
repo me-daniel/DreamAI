@@ -12,7 +12,7 @@ GROQ_API_KEY = "gsk..." <br>
 OPENAI_API_KEY = "sk..." <br>
 LANGCHAIN_PROJECT = "DreamGuardTest" <br/>
 
-*API keys with limited resources are available on Slack pinned in general* <br/>
+*API keys with limited resources are available on Slack pinned in ai* <br/>
 
 To run the chatbot with a streamlit GUI run the commmand: <br>
 'streamlit run streamlit_chatbot.py' <br/>
