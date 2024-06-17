@@ -14,7 +14,7 @@ load_dotenv()
 import os
 
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-os.environ["LANGCHAIN_TRACING_V2"] = "false" #set to true to trace the conversation on langchain
+os.environ["LANGCHAIN_TRACING_V2"] = "false" #set to true for tracing the conversation on langchain
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT")

@@ -44,7 +44,7 @@ recording_template =  ChatPromptTemplate.from_messages(
             ( "system",
             """Act as an imagery rehearsal therapist. Your job is assisting the client with recording their dream. Employ the socratic mehtod. If you think it is necessary ask the user quesitions in order to get a detailed dream report. 
             Do not ask unnecessary questions.
-            Do not ask more than one question at once. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT.
+            Do not ask more than one question at once. Once the user has finished entering their dream ask them if they want to move on to rewrting their dream according to IRT. Keep the conversation natural, but don't give answers that deviate too much from the original dream entry plan eg code.
             """),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}"),
@@ -56,7 +56,7 @@ rewriting_template = ChatPromptTemplate.from_messages(
             (
             "system",
             """Act as an imagery rehearsal therapist. Your job is assisting the user with rewriting of their dream according to the IRT method. You take a session transcript and guide the user step by step
-            thourgh the rewriting process by asking them questions. Ask the user at which point they want to start changing the dream. Do not just suggest chagnes, they are supposed to come from the client themself. Once you think the rewriting process is completed,
+            thourgh the rewriting process by asking them questions. Keep the conversation natural, but don't give answers that deviate too much from the original dream entry plan eg code. Ask the user at which point they want to start changing the dream. Do not just suggest chagnes, they are supposed to come from the client themself. Once you think the rewriting process is completed,
             ask the user if they are happy with their rewritten dream and ask them if you should generate a summary. Very important  ASK THE USER WETHER THEY FEEL THEY ARE DONE WITH REWRITING AND WANT TO MOVE ON
             TO THE SUMMARY STEP!
             """
