@@ -10,3 +10,6 @@ __pycache__/
 *.pyc
 
 # End of https://www.toptal.com/developers/gitignore/api/dotenv
+
+# Ignore chat_histories folder
+chat_histories/
