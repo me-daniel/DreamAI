@@ -18,7 +18,7 @@ os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["LANGCHAIN_TRACING_V2"] = "false" #turn to true
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
 os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("DreamGuardTest")
+os.environ["LANGCHAIN_PROJECT"] = "DreamGuardTest"
 
 # Initialize or retrieve chat history from session state
 if "ephemeral_chat_history_for_chain" not in st.session_state:
