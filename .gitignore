@@ -5,6 +5,7 @@
 .env
 vnv
 .DS_Store
+chat_histories
 
 # Python cache directories
 __pycache__/
